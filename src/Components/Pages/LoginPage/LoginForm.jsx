@@ -10,16 +10,17 @@ import cfg from "configuration.json"
 export default function LoginForm(){
 
     const [loginData, setLoginData] = React.useState({username : "admin", password : "admin"})
+    const [action, setAction] = React.useState("Login") // default Login
     const [shouldTryToLogin, setShouldTryToLogin] = React.useState(false)
+
     const navigate = useNavigate()
 
     const statefulRun = {
         state : shouldTryToLogin,
         modifierFunc : setShouldTryToLogin
     }
-    
-    const [response, popupsObj] = useAxiosRequest("Login", "post", statefulRun, loginData)
 
+    const [response, popupsObj] = useAxiosRequest(action, "post", statefulRun, loginData)
     function handleChange(event){
         setLoginData(prevData => {
             let old = {...prevData, [event.target.name] : event.target.value}
@@ -29,6 +30,7 @@ export default function LoginForm(){
 
     function handleButtonPress(event){
         event.preventDefault()
+        setAction(event.target.name === "loginBtn" ? "Login" : "Register")
         setShouldTryToLogin(true)
     }
     const validationSettings = cfg.Constants.LoginValidation
@@ -55,9 +57,9 @@ export default function LoginForm(){
                     <input type="password" placeholder="Password" onChange={handleChange} value={loginData.password}
                     name="password" className="text-sm text-center w-24 laptop:w-36"></input>
                     <div className="grid grid-cols-2 gap-1">
-                        <button className="bg-green-400 my-1 px-1.5 hover:bg-gray-500 font-medium text-sm laptop:text-base disabled:bg-red-800"
+                        <button name="registerBtn" className="bg-green-400 my-1 px-1.5 hover:bg-gray-500 font-medium text-sm laptop:text-base disabled:bg-red-800"
                         onClick={handleButtonPress} type="button" disabled={checkIfAnyIsTrue(popupsObj.visiblePopups)}>Register</button>
-                        <button className="bg-green-400 my-1 px-1.5 hover:bg-gray-500 font-medium text-sm laptop:text-base disabled:bg-red-800" 
+                        <button name="loginBtn" className="bg-green-400 my-1 px-1.5 hover:bg-gray-500 font-medium text-sm laptop:text-base disabled:bg-red-800" 
                         onClick={handleButtonPress} type="submit" disabled={checkIfAnyIsTrue(popupsObj.visiblePopups)}>Login</button>
                     </div>
                 </form>
