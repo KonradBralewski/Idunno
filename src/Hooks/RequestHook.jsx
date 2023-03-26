@@ -34,13 +34,16 @@ export const useAxiosRequest = (noun, method, statefulRun = null, reqBody = null
             withCredentials : true,
             headers: {'Content-Type': 'application/json'}
         })
-        .then(result => setData(result.data))
+        .then(result => {
+            setData(result.data) 
+            Popups.setErrorMessage(setPopupsObj, undefined)
+        }) // setData && "zero" error message.
         .catch(error => {
             let response = error.response
             if(response){
                 if(response.status == 401){ //  Unauthorized
                     nav("/Login")
-                    error.message = "Unauthorized"
+                    error.response.data = "Unauthorized. Please sign up."
                 } 
                 
             }

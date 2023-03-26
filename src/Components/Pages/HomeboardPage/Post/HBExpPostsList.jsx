@@ -11,6 +11,7 @@ export default function HBExpPostsList({searchMatch}){
     
     const [requestNoun, setRequestNoun] = React.useState(()=>"Posts")
     const [posts, popupsObj] = useAxiosRequest(requestNoun, "get")
+    
     const nav = useNavigate()
 
     React.useEffect(()=>{
