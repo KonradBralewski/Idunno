@@ -1,22 +1,41 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import * as reqHelper from "Helpers/RequestHelper"
 import * as Popups from "Components/Popups/Popups"
-import Warning from "./Warning/Warning"
+import Warning from "Components/Warning/Warning"
 import PostTextEditor from "./Editors/PostTextEditor"
 import PostPageContent from "../PostPage/PostPageContent/PostPageContent"
 import { EditorState } from "draft-js"
-import { getEditorText, getEditorTextLength } from "Helpers/Utilities"
+import { getEditorText, getEditorTextLength } from "Helpers/EditorHelpers"
+import { useAxiosRequest } from "Hooks/RequestHook"
 
 
 
 export default function AddPage(){
     
-    const [popupsObj, setPopupsObj] = React.useState(Popups.popupsObject)
     const [titleEditorState, setTitleEditorState] = React.useState(() => EditorState.createEmpty())
     const [descriptionEditorState, setDescriptionEditorState] = React.useState(() => EditorState.createEmpty())
+
+    const addRequestPayload = {
+        postTitle : getEditorText(titleEditorState),
+        postDescription : getEditorText(descriptionEditorState),
+        imagePath : "foo_bar"
+    }
+
+    const [shouldAdd, setShouldAdd] = React.useState(false)
     const [tries, setTries] = React.useState(0)
 
+    const statefulRun = {
+        state : shouldAdd,
+        modifierFunc : setShouldAdd
+    }
+
+    const [response, popupsObj] = useAxiosRequest("Posts", "post", statefulRun, addRequestPayload)
+
+    React.useEffect(()=>{
+        if(response != undefined && popupsObj.errorMessage === undefined)
+            navigate("/Homeboard")
+    }, [response, popupsObj.errorMessage])
+    
     const editors = {
         titleEditor :{
             state : titleEditorState,
@@ -30,24 +49,6 @@ export default function AddPage(){
 
     const navigate = useNavigate()
 
-    function addNewPost(){
-        Popups.startWaiting(setPopupsObj)
-        reqHelper.postRequest("Posts", {
-            postTitle : getEditorText(titleEditorState),
-            postDescription : getEditorText(descriptionEditorState),
-            imagePath : "foo_bar"
-        })
-        .then(() => setTimeout(()=>{
-            Popups.endWaiting(setPopupsObj)
-            navigate("/Homeboard")
-        }), 2000)
-        .catch(() =>{
-            Popups.endWaiting(setPopupsObj)
-            Popups.startError(setPopupsObj)
-            Popups.endError(setPopupsObj, 3000)
-        })
-    }
-
     function checkFormRequirements(){
         if(getEditorTextLength(titleEditorState) >= 3 &&
         getEditorTextLength(descriptionEditorState) >= 10) return true
@@ -56,17 +57,13 @@ export default function AddPage(){
     }
 
     function handleSubmit(event){
-        incrementTries()
+        setTries(prevCount => prevCount + 1)
 
         event.preventDefault()
 
         if(checkFormRequirements()){
-            addNewPost()
+            setShouldAdd(true)
         }
-    }
-
-    function incrementTries(){
-        setTries(prevCount => prevCount + 1)
     }
 
     function warningVisibility(state, min){
@@ -80,10 +77,13 @@ export default function AddPage(){
     const previewPost = {
         postTitle : getEditorTextLength(titleEditorState) > 0 ?
                              getEditorText(titleEditorState) : 
-                                    "<p style='color:grey;'><strong><em>There should be a title.</em</strong></p>",
+                                    "<p style='color:grey;'>There should be a title.</p>",
         postDescription : getEditorTextLength(descriptionEditorState) > 0 ? 
                             getEditorText(descriptionEditorState) : 
-                                    "<p style='color:grey;'><strong><em>There should be a description.</em</strong></p>"
+                                    "<p style='color:grey;'>There should be a description.</p>",
+        postDate : new Date().toLocaleString().replaceAll(".", "-").replace(",", "").slice(0, -3), // get string -> format to database convention ->
+                                                                                                  // remove unwanted chars -> remove seconds
+        postAuthor : "You"
     }
 
     function responsivePopups() {
@@ -98,7 +98,7 @@ export default function AddPage(){
     }
 
     return (
-        <div className="flex flex-col my-1 overflow-x-hidden">
+        <div className="flex flex-col overflow-x-hidden w-screen h-screen justify-center -my-12 tablet:-my-14">
             <div className={responsivePopups()}>
                 <Popups.Popups popupsObj={popupsObj}/>
             </div>

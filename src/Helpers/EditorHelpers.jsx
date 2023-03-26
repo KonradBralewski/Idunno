@@ -2,18 +2,6 @@ import { stateToHTML } from "draft-js-export-html"
 import  parse  from "html-react-parser"
 import { sanitize } from "dompurify"
 
-export function checkIfAnyIsTrue(givenObject){
-    for(var key in givenObject){
-        if(givenObject[key] === true){
-            return true
-        }
-    }
-    return false
-}
-
-export function navToUrl(navHook, url){
-    navHook(url)
-}
 
 export function getEditorText(state){
     return stateToHTML(state.getCurrentContent())

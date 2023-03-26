@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<HBSidebar/>}>
             <Route path="/Homeboard" element={<Homeboard/>}/>
             <Route path="/Add" element={<AddPage/>}/>
-            <Route path="/Posts/:postID" element={<PostPage/>}/>
+            <Route path="/Posts/:postId" element={<PostPage/>}/>
             <Route path="/Profile" element={<ProfilePage/>}/>
             <Route path="/Messages" element={<MessagesPage/>}/>
           </Route>

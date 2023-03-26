@@ -5,7 +5,7 @@ import board from "Assets/board.png"
 import plus from "Assets/plus.png"
 import SidebarItem from "./SidebarItem";
 import { Outlet, useNavigate } from "react-router-dom";
-import { navToUrl } from "Helpers/Utilities";
+import { navToUrl } from "Helpers/NavHelpers";
 
 
 export default function HBSidebar(){

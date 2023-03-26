@@ -2,7 +2,7 @@ import React from "react";
 import notFoundImg from "Assets/imgNotFound.jpg"
 import errorImg from "Assets/imgError.jpg"
 import demoImg from "Assets/Demo.jpg"
-import { rawHtmlToJSXWithClass } from "Helpers/Utilities";
+import { rawHtmlToJSXWithClass } from "Helpers/EditorHelpers";
 
 
 export default function ExpPost(props){

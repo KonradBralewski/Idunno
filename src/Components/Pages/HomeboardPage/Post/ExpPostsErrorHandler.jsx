@@ -1,27 +1,13 @@
+import { receiveErrorMessage } from "Helpers/JsonHelpers"
 import React from "react"
-import { useNavigate } from "react-router-dom"
 import ExpPost from "./ExpPost"
 
 export default function ExpPostsErrorHandler({error}){
-
-    const nav = useNavigate()
-
-    function handleError(){
-        const response = error.response
-        if(response != undefined){
-            const statusCode = response.status
-            console.log(statusCode)
-            if(statusCode == "401"){ //AUTHENTICATION ERROR CODE
-                nav("/Auth")
-            }
-        }
-    }
-
-    React.useEffect(()=>handleError(), [])
-
+    const message = error.response != undefined ? receiveErrorMessage(error) : "SERVER ERROR"
     return(
-        <div className="w-screen flex justify-center items-center mt-24">
-            <ExpPost title="<p><b><em>SERVER ERROR</em></b></p>" description="<p><b><em>SERVER ERROR</em></b></p>"/>
+        <div className="w-screen flex justify-center items-center mt-36 tablet:mt-20">
+            <ExpPost title={`<p style='color:red';><b><em>${message}</em></b></p>`} 
+            description={`<p style='color:red';><b><em>${message}</em></b></p>`}/>
         </div>
     )
 }

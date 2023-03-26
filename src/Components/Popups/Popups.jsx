@@ -4,7 +4,8 @@ export const popupsObject = {
     visiblePopups: {
         waitingPopup : false, errorPopup : false
     },
-    errorMessage : undefined
+    errorMessage : undefined,
+    wasErrorShowed : false
 }
 
 export const Popups = ({popupsObj}) => {
@@ -67,15 +68,23 @@ export function endWaiting(modifierFunc, ms){
 
 export function startError(modifierFunc, ms){
     switchPopup(modifierFunc, "errorPopup", true, ms)
+    setTimeout(()=>{setErrorWasShowed(modifierFunc, false)}, ms)
 }
 
 export function endError(modifierFunc, ms){
     switchPopup(modifierFunc, "errorPopup", false, ms)
+    setTimeout(()=>{setErrorWasShowed(modifierFunc, true)}, ms)
 }
 
 export function setErrorMessage(modifierFunc, message){
     modifierFunc(prevPopups => {
         return {...prevPopups, errorMessage : message}
+    })
+}
+
+export function setErrorWasShowed(modifierFunc, boolean){
+    modifierFunc(prevPopups => {
+        return {...prevPopups, wasErrorShowed : boolean}
     })
 }
 

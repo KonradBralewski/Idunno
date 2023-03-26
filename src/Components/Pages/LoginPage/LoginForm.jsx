@@ -1,18 +1,24 @@
 import "index.css"
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import bcrypt from "bcryptjs"
 import * as Popups from "Components/Popups/Popups"
-import * as reqHelper from "Helpers/RequestHelper"
-import {checkIfAnyIsTrue} from "Helpers/Utilities"
+import {checkIfAnyIsTrue} from "Helpers/JsonHelpers"
+import { useAxiosRequest } from "Hooks/RequestHook";
+import Warning from "Components/Warning/Warning"
+import cfg from "configuration.json"
 
 export default function LoginForm(){
-    const [popupsObj, setPopupsObj] = React.useState(()=>Popups.popupsObject)
 
     const [loginData, setLoginData] = React.useState({username : "admin", password : "admin"})
+    const [shouldTryToLogin, setShouldTryToLogin] = React.useState(false)
     const navigate = useNavigate()
 
-    const salt = bcrypt.genSaltSync(12)
+    const statefulRun = {
+        state : shouldTryToLogin,
+        modifierFunc : setShouldTryToLogin
+    }
+    
+    const [response, popupsObj] = useAxiosRequest("Login", "post", statefulRun, loginData)
 
     function handleChange(event){
         setLoginData(prevData => {
@@ -21,55 +27,18 @@ export default function LoginForm(){
         })
     }
 
-    function handleLoginSubmit(event){
-        Popups.startWaiting(setPopupsObj)
-
-        const hashedPassword = bcrypt.hashSync(loginData.password, salt)
-
-        const credentials = {
-            username : loginData.username,
-            password : hashedPassword
-        }
-
-        reqHelper.postRequest("Login", credentials).catch((err)=>{
-            Popups.setErrorMessage(setPopupsObj, err)
-            Popups.endWaiting(setPopupsObj)
-            Popups.startError(setPopupsObj, 300)
-
-            }).then(token => {
-                if(token != undefined){
-                    navigate("/Homeboard")
-                }
-                Popups.endWaiting(setPopupsObj)
-            })
-
+    function handleButtonPress(event){
         event.preventDefault()
+        setShouldTryToLogin(true)
     }
+    const validationSettings = cfg.Constants.LoginValidation
 
-    function handleRegisterSubmit(event){
-        Popups.startWaiting(setPopupsObj)
-
-        const hashedPassword = bcrypt.hashSync(loginData.password, salt)
-
-        const credentials = {
-            username : loginData.username,
-            password : hashedPassword
-        }
-
-        reqHelper.postRequest("Register", credentials).catch((err)=>{
-                Popups.setErrorMessage(setPopupsObj, err)
-                Popups.endWaiting(setPopupsObj)
-                Popups.startError(setPopupsObj, 300)
-            }).then(()=>Popups.endWaiting(setPopupsObj))
-
-        event.preventDefault()
-    }
+    const usernameWarning = loginData.username.length < validationSettings.UsernameCharsMin
+    const passwordWarning = loginData.password.length < validationSettings.PasswordCharsMin
 
     React.useEffect(()=>{
-        if(popupsObj.visiblePopups.errorPopup){
-            Popups.endError(setPopupsObj, 3000)
-        }
-    }, [popupsObj.visiblePopups.errorPopup])
+        if(response != undefined) navigate("/Homeboard")    // It means request was succesful and is saved in state.
+    }, [response])
 
     return (
         <div>
@@ -79,15 +48,17 @@ export default function LoginForm(){
             <div className="absolute flex flex-col my-1 h-96">    
             <h1 className="text-white self-center text-3xl tablet:text-4xl laptop:text-5xl desktop:text-6xl overflow-hidden">Idunno</h1>
                 <form className="flex flex-col items-center justify-items-center w-screen gap-1">
+                    <Warning visible={usernameWarning} message="Login should've at least 4 characters entered."/>
                     <input type="text" placeholder="Username" onChange={handleChange}
                     value={loginData.username} name="username" className="text-sm text-center w-24 laptop:w-36"></input>
+                    <Warning visible={passwordWarning} message="Password should've at least 4 characters entered."/>
                     <input type="password" placeholder="Password" onChange={handleChange} value={loginData.password}
                     name="password" className="text-sm text-center w-24 laptop:w-36"></input>
                     <div className="grid grid-cols-2 gap-1">
                         <button className="bg-green-400 my-1 px-1.5 hover:bg-gray-500 font-medium text-sm laptop:text-base disabled:bg-red-800"
-                        onClick={handleRegisterSubmit} type="button" disabled={checkIfAnyIsTrue(popupsObj.visiblePopups)}>Register</button>
+                        onClick={handleButtonPress} type="button" disabled={checkIfAnyIsTrue(popupsObj.visiblePopups)}>Register</button>
                         <button className="bg-green-400 my-1 px-1.5 hover:bg-gray-500 font-medium text-sm laptop:text-base disabled:bg-red-800" 
-                        onClick={handleLoginSubmit} type="submit" disabled={checkIfAnyIsTrue(popupsObj.visiblePopups)}>Login</button>
+                        onClick={handleButtonPress} type="submit" disabled={checkIfAnyIsTrue(popupsObj.visiblePopups)}>Login</button>
                     </div>
                 </form>
             </div>
