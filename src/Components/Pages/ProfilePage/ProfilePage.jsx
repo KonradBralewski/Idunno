@@ -1,11 +1,17 @@
-import profilePic from "Assets/profilePicture.jpg"
+import { useAxiosRequest } from "Hooks/RequestHook";
+import * as Popups from "Components/Popups/Popups"
+import ProfilePageContent from "./ProfilePageContent";
 
 export default function ProfilePage(){
+
+    const [profile, popupsObj] = useAxiosRequest("Users/CurrentUser", "get")
+    
     return (
         <main>
-            <p className="m-auto text-sm tablet:text-base laptop:text-xl text-center">acc name</p>
-            <img src={profilePic} alt="Your profile" className="object-cover my-2 m-auto h-36 tablet:h-60 laptop:h-72"/>
-            {<p>your posts</p>}
+            <div className="absolute m-auto left-0 right-0 top-36">
+                <Popups.Popups popupsObj={popupsObj}/>
+            </div>
+           {profile != undefined && <ProfilePageContent profile={profile}/>}
         </main>
     )
 }
