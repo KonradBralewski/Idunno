@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Idunno/static/css/main.9fe55201.css",
-    "main.js": "/Idunno/static/js/main.cc031617.js",
-    "static/media/pizza.mp4": "/Idunno/static/media/pizza.3678b3904f55af1009df.mp4",
-    "static/media/imgNotFound.jpg": "/Idunno/static/media/imgNotFound.b34babc75f7d1f71855b.jpg",
-    "static/media/Image2.jpg": "/Idunno/static/media/Image2.c5210b3aa31d01432839.jpg",
-    "static/media/Image1.jpg": "/Idunno/static/media/Image1.5bed5043326132d24409.jpg",
-    "static/media/imgError.jpg": "/Idunno/static/media/imgError.7beb04cc4b323fa2d739.jpg",
-    "index.html": "/Idunno/index.html"
+    "main.css": "/Homeboard/static/css/main.f932c9ac.css",
+    "main.js": "/Homeboard/static/js/main.c71c59e9.js",
+    "static/media/pizza.mp4": "/Homeboard/static/media/pizza.3678b3904f55af1009df.mp4",
+    "static/media/imgNotFound.jpg": "/Homeboard/static/media/imgNotFound.b34babc75f7d1f71855b.jpg",
+    "static/media/Demo.jpg": "/Homeboard/static/media/Demo.01df784267cb1d99af76.jpg",
+    "static/media/imgError.jpg": "/Homeboard/static/media/imgError.7beb04cc4b323fa2d739.jpg",
+    "static/media/error.png": "/Homeboard/static/media/error.c4f9b7d4bf803c440bba.png",
+    "index.html": "/Homeboard/index.html"
   },
   "entrypoints": [
-    "static/css/main.9fe55201.css",
-    "static/js/main.cc031617.js"
+    "static/css/main.f932c9ac.css",
+    "static/js/main.c71c59e9.js"
   ]
 }
