@@ -39,7 +39,7 @@ export default function LoginForm(){
     const passwordWarning = loginData.password.length < validationSettings.PasswordCharsMin
 
     React.useEffect(()=>{
-        if(response != undefined) navigate("/Homeboard")    // It means request was succesful and is saved in state.
+        if(response != undefined) navigate("/Idunno")    // It means request was succesful and is saved in state.
     }, [response])
 
     return (
