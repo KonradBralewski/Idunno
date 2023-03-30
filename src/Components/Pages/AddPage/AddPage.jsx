@@ -6,7 +6,7 @@ import PostTextEditor from "./Editors/PostTextEditor"
 import PostPageContent from "../PostPage/PostPageContent/PostPageContent"
 import { EditorState } from "draft-js"
 import { getEditorText, getEditorTextLength } from "Helpers/EditorHelpers"
-import { useAxiosRequest } from "Hooks/RequestHook"
+import { useAxiosRequest } from "Hooks/UseAxiosRequest"
 
 
 
@@ -33,7 +33,7 @@ export default function AddPage(){
 
     React.useEffect(()=>{
         if(response != undefined && popupsObj.errorMessage === undefined)
-            navigate("/Homeboard")
+            navigate("/Idunno")
     }, [response, popupsObj.errorMessage])
     
     const editors = {

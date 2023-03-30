@@ -15,7 +15,7 @@ export default function UserPostsShortcut({posts}){
     }
 
     return (
-        <section className="m-auto w-44 tablet:w-60">
+        <section className="w-44 tablet:w-52 laptop:w-64 tablet:max-h-72 laptop:mt-8 pr-2">
             {getPostsShortcut()}
         </section>
     )

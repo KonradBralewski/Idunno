@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as Popups from "Components/Popups/Popups"
 import {checkIfAnyIsTrue} from "Helpers/JsonHelpers"
-import { useAxiosRequest } from "Hooks/RequestHook";
+import { useAxiosRequest } from "Hooks/UseAxiosRequest";
 import Warning from "Components/Warning/Warning"
 import cfg from "configuration.json"
 
@@ -23,8 +23,8 @@ export default function LoginForm(){
     const [response, popupsObj] = useAxiosRequest(action, "post", statefulRun, loginData)
     function handleChange(event){
         setLoginData(prevData => {
-            let old = {...prevData, [event.target.name] : event.target.value}
-            return old
+            let newFormData = {...prevData, [event.target.name] : event.target.value}
+            return newFormData
         })
     }
 

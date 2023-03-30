@@ -3,7 +3,7 @@ import * as Popups from "Components/Popups/Popups"
 import ExpPost from "./ExpPost"
 import { useNavigate } from "react-router-dom"
 import ExpPostsErrorHandler from "./ExpPostsErrorHandler"
-import { useAxiosRequest } from "Hooks/RequestHook"
+import { useAxiosRequest } from "Hooks/UseAxiosRequest"
 import { checkIfAnyIsTrue } from "Helpers/JsonHelpers"
 
 export default function HBExpPostsList({searchMatch}){

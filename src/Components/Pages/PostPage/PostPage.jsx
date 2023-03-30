@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useAxiosRequest } from "Hooks/RequestHook";
+import { useAxiosRequest } from "Hooks/UseAxiosRequest";
 import PostPageContent from "./PostPageContent/PostPageContent";
 import * as Popups from "Components/Popups/Popups"
 import { receiveErrorMessage } from "Helpers/JsonHelpers";
@@ -45,9 +45,7 @@ export default function PostPage(){
 
     return(
         <main className="flex flex-col w-screen h-screen justify-center -mt-12">
-            <div>
-                <Popups.Popups popupsObj={popupsObj}/>
-            </div>
+            <Popups.Popups popupsObj={popupsObj}/>
             {renderPostPage()}
         </main>
     )
