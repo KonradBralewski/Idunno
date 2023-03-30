@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Idunno/static/css/main.741ed601.css",
-    "main.js": "/Idunno/static/js/main.a69f1c9f.js",
+    "main.css": "/Idunno/static/css/main.36b12d3d.css",
+    "main.js": "/Idunno/static/js/main.4f958099.js",
     "static/media/profilePicture.jpg": "/Idunno/static/media/profilePicture.73b07dd4215f11d070dc.jpg",
     "static/media/pizza.mp4": "/Idunno/static/media/pizza.3678b3904f55af1009df.mp4",
     "static/media/imgNotFound.jpg": "/Idunno/static/media/imgNotFound.b34babc75f7d1f71855b.jpg",
@@ -11,7 +11,7 @@
     "index.html": "/Idunno/index.html"
   },
   "entrypoints": [
-    "static/css/main.741ed601.css",
-    "static/js/main.a69f1c9f.js"
+    "static/css/main.36b12d3d.css",
+    "static/js/main.4f958099.js"
   ]
 }
