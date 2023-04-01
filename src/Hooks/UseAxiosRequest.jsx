@@ -9,7 +9,6 @@ export const useAxiosRequest = (noun, method, statefulRun = null, reqBody = null
 
     const [data, setData] = React.useState(undefined)
     const [popupsObj, setPopupsObj] = React.useContext(PopupsContext)
-    const nav = useNavigate()
 
     const serverSettings = cfg.Constants.API
     const popupsSettings = cfg.Constants.Popups
@@ -39,15 +38,6 @@ export const useAxiosRequest = (noun, method, statefulRun = null, reqBody = null
             Popups.setErrorMessage(setPopupsObj, undefined)
         }) // setData && "zero" error message.
         .catch(error => {
-            let response = error.response
-            if(response){
-                if(response.status == 401){ //  Unauthorized
-                    nav("/Login")
-                    error.response.data = "Unauthorized. Please sign up."
-                } 
-                
-            }
-
             Popups.setErrorMessage(setPopupsObj, error)
             Popups.endWaiting(setPopupsObj)
             Popups.startError(setPopupsObj)

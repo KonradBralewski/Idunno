@@ -4,7 +4,7 @@ import ExpPost from "./ExpPost"
 import { useNavigate } from "react-router-dom"
 import ExpPostsErrorHandler from "./ExpPostsErrorHandler"
 import { useAxiosRequest } from "Hooks/UseAxiosRequest"
-import { checkIfAnyIsTrue } from "Helpers/JsonHelpers"
+import { checkIfAnyIsTrue, receiveErrorCode } from "Helpers/JsonHelpers"
 
 export default function HBExpPostsList({searchMatch}){
 
@@ -39,12 +39,18 @@ export default function HBExpPostsList({searchMatch}){
     }
 
     function shouldUseHandler(){
-        if(popupsObj.wasErrorShowed && popupsObj.errorMessage != undefined 
-            && !checkIfAnyIsTrue(popupsObj.visiblePopus)) return true
+        
+        if(popupsObj.wasErrorShowed && popupsObj.error != undefined && !checkIfAnyIsTrue(popupsObj.visiblePopus)){
+            return true
+        }
+        
         return false
     }
-    
-    
+
+    if(receiveErrorCode(popupsObj.error) == 401){
+        nav("/Auth")
+    }
+
     return(
         <main className="m-auto flex flex-col">
             <div className="absolute m-auto left-0 right-0 top-36">
