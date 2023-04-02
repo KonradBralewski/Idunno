@@ -5,7 +5,7 @@ import * as Popups from "Components/Popups/Popups"
 import {checkIfAnyIsTrue} from "Helpers/JsonHelpers"
 import { useAxiosRequest } from "Hooks/UseAxiosRequest";
 import Warning from "Components/Warning/Warning"
-import cfg from "configuration.json"
+import cfg from "configuration.js"
 
 export default function LoginForm(){
 

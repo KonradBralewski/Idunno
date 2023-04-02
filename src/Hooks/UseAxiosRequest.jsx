@@ -1,6 +1,6 @@
 import { PopupsContext } from "Context/IdunnoContext"
 import React from "react"
-import cfg from "../configuration.json"
+import cfg from "../configuration.js"
 import axios from "axios"
 import * as Popups from "Components/Popups/Popups"
 import { useNavigate } from "react-router-dom"
