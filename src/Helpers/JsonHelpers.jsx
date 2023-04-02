@@ -8,11 +8,22 @@ export function checkIfAnyIsTrue(givenObject){
 }
 
 export function receiveErrorMessage(error){
-    const response = error.response
-
-    if(response != undefined){
-        return response.data
+    if(error != undefined){
+        const res = error.response
+        if(res != undefined && res.data != ""){
+            return res.data
+        }
+        else 
+            return error.message
     }
 
-    return undefined
+    return "Server error."
+}
+
+export function receiveErrorCode(error){
+    if(error != undefined && error.response != undefined){
+        return error.response.status
+    }
+
+    return 500 // INTERNAL SERVER ERROR
 }

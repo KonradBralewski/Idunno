@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useAxiosRequest } from "Hooks/RequestHook";
+import { useAxiosRequest } from "Hooks/UseAxiosRequest";
 import PostPageContent from "./PostPageContent/PostPageContent";
 import * as Popups from "Components/Popups/Popups"
 import { receiveErrorMessage } from "Helpers/JsonHelpers";
@@ -31,9 +31,9 @@ export default function PostPage(){
         if(post != undefined){
             return(
                 <section className="flex flex-col">
-                    {post != undefined && <PostPageContent post={post}/>}
-                    {post != undefined && <button className="bg-blue-500 rounded-sm px-0.5' border-red-900 border-x-2 border-y-2 
-                        text-center text-xs xs:text-sm w-24 xs:w-32 tablet:w-44 self-center">Ask an author</button>}
+                    <PostPageContent post={post}/>
+                    <button className="bg-blue-500 rounded-sm px-0.5' border-red-900 border-x-2 border-y-2 
+                        text-center text-xs xs:text-sm w-24 xs:w-32 tablet:w-44 self-center">Ask an author</button>
                 </section>
             )
         }
@@ -45,9 +45,7 @@ export default function PostPage(){
 
     return(
         <main className="flex flex-col w-screen h-screen justify-center -mt-12">
-            <div>
                 <Popups.Popups popupsObj={popupsObj}/>
-            </div>
             {renderPostPage()}
         </main>
     )

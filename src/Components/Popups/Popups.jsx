@@ -1,17 +1,19 @@
 import errorImg from "Assets/error.png"
+import { receiveErrorMessage } from "Helpers/JsonHelpers"
 
 export const popupsObject = {
     visiblePopups: {
         waitingPopup : false, errorPopup : false
     },
-    errorMessage : undefined,
+    error : undefined,
     wasErrorShowed : false
 }
 
 export const Popups = ({popupsObj}) => {
+    
     return(
         (popupsObj.visiblePopups.waitingPopup && <WaitingPopup/>) ||
-        (popupsObj.visiblePopups.errorPopup && <ErrorPopup msg = {popupsObj.errorMessage}/>)
+        (popupsObj.visiblePopups.errorPopup && <ErrorPopup error = {popupsObj.error}/>)
     )
 }
 
@@ -23,21 +25,11 @@ const WaitingPopup = () => {
     )
 }
 
-const ErrorPopup = ({msg}) => {
-    const message = () => {
-        if(msg != undefined){
-            const response = msg.response
-            if(response != undefined){
-                return response.data
-            }
-        }
-        return "Server error."
-    }
-
+const ErrorPopup = ({error}) => {
     return(
         <div className="bg-black/80 flex flex-col items-center justify-center 
                     text-white min-w-36 min-h-36 tablet:min-w-48 tablet:min-h-48 py-2">
-            <p className="">{message()}</p>
+            <p className="">{receiveErrorMessage(error)}</p>
             <img src={errorImg} className="w-28 h-28"/>
         </div>
     )
@@ -48,7 +40,7 @@ function switchPopup(modifierFunc, popupName, value, ms = 0){
         modifierFunc(prevPopups => {
             let prev = prevPopups.visiblePopups
             prev = {...prev, [popupName] : value}
-            return {visiblePopups : prev, errorMessage : prevPopups.errorMessage}
+            return {visiblePopups : prev, error : prevPopups.error, wasErrorShowed : prevPopups.wasErrorShowed}
         })
     }
     
@@ -76,9 +68,9 @@ export function endError(modifierFunc, ms){
     setTimeout(()=>{setErrorWasShowed(modifierFunc, true)}, ms)
 }
 
-export function setErrorMessage(modifierFunc, message){
+export function setErrorMessage(modifierFunc, error){
     modifierFunc(prevPopups => {
-        return {...prevPopups, errorMessage : message}
+        return {...prevPopups, error : error}
     })
 }
 
@@ -87,4 +79,3 @@ export function setErrorWasShowed(modifierFunc, boolean){
         return {...prevPopups, wasErrorShowed : boolean}
     })
 }
-

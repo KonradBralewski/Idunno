@@ -25,7 +25,7 @@ export default function ExpPost(props){
                 {rawHtmlToJSXWithClass(props.title, "p", "m-auto text-xs tablet:text-sm")}
             </section>
             {props.date && <p className="text-center text-xxs tablet:text-xs">{props.date}</p>}
-            <img src={getImage()} alt="post" className="object-cover my-2 m-auto h-28 tablet:h-60 laptop:h-72" onClick={()=>props.handleClick(props.postID)}/>
+            <img src={getImage()} alt="post" className="object-cover my-2 m-auto h-28 tablet:h-60 laptop:h-72 hover:border hover:blur-sm" onClick={()=>props.handleClick(props.postID)}/>
             {rawHtmlToJSXWithClass(props.description, "p", "line-clamp-2 tablet:line-clamp-3 text-center text-xs tablet:text-sm")}
         </article>
     )

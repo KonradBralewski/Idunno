@@ -3,7 +3,8 @@ import React from "react"
 import ExpPost from "./ExpPost"
 
 export default function ExpPostsErrorHandler({error}){
-    const message = error.response != undefined ? receiveErrorMessage(error) : "SERVER ERROR"
+    const message = receiveErrorMessage(error)
+    
     return(
         <div className="w-screen flex justify-center items-center mt-36 tablet:mt-20">
             <ExpPost title={`<p style='color:red';><b><em>${message}</em></b></p>`} 

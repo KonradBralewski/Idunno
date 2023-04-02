@@ -15,7 +15,7 @@ export default function HBSidebar(){
     return(
         <div>
             <nav className="fixed top-2 left-0 flex flex-col">
-                <SidebarItem text="Board" img={board} handleClick={()=>{navToUrl(navigate, "/Homeboard")}}/>
+                <SidebarItem text="Board" img={board} handleClick={()=>{navToUrl(navigate, "/Idunno")}}/>
                 <SidebarItem text="Profile" img={profile} handleClick={()=>navToUrl(navigate, "/Profile")}/>
                 <SidebarItem text="Messages" img={messages} handleClick={()=>navToUrl(navigate, "/Messages")}/>
                 <SidebarItem text="Add new" img={plus} handleClick={()=>navToUrl(navigate, "/Add")}/>

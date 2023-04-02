@@ -6,7 +6,7 @@ import PostTextEditor from "./Editors/PostTextEditor"
 import PostPageContent from "../PostPage/PostPageContent/PostPageContent"
 import { EditorState } from "draft-js"
 import { getEditorText, getEditorTextLength } from "Helpers/EditorHelpers"
-import { useAxiosRequest } from "Hooks/RequestHook"
+import { useAxiosRequest } from "Hooks/UseAxiosRequest"
 
 
 
@@ -33,7 +33,7 @@ export default function AddPage(){
 
     React.useEffect(()=>{
         if(response != undefined && popupsObj.errorMessage === undefined)
-            navigate("/Homeboard")
+            navigate("/Idunno")
     }, [response, popupsObj.errorMessage])
     
     const editors = {
@@ -107,7 +107,7 @@ export default function AddPage(){
                 <Warning visible={warningVisibility(descriptionEditorState, 10)} 
                     message="Description should be at least 10 characters long."/>
                 <PostTextEditor editors={editors}/>
-                <button className="bg-green-400 my-1 px-1.5 hover:bg-gray-500 font-medium phone:text-sm laptop:text-base">Add</button>
+                <button className="bg-green-400 my-1 px-1.5 hover:bg-gray-500 text-sm laptop:text-base">Add</button>
                 <section className="mt-3">
                     <PostPageContent post={previewPost}/>
                 </section>

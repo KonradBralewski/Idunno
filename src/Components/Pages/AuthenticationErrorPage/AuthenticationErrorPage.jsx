@@ -2,21 +2,22 @@ import authImg from "Assets/auth.png"
 import * as Popups from "Components/Popups/Popups"
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import cfg from "configuration.json"
+import { PopupsContext } from "Context/IdunnoContext";
 
 export default function AuthenticationErrorPage(){
     const nav = useNavigate()
-    const [popupsObj, setPopupsObj] = React.useState(()=> Popups.popupsObject)
-
-    const delayBeforeNav = 2000
-    const animEndsBefore = 200
+    const [popupsObj, setPopupsObj] = React.useContext(PopupsContext)
 
     React.useEffect(()=>{
+        Popups.endError(setPopupsObj)
+
         Popups.startWaiting(setPopupsObj)
-        Popups.endWaiting(setPopupsObj, delayBeforeNav - animEndsBefore)
+        Popups.endWaiting(setPopupsObj, cfg.Constants.Popups.DefaultAuthErrorPageDelay)
 
         const deleyedRedirect = setTimeout(()=>{
             nav("/Login")
-        }, delayBeforeNav)
+        }, cfg.Constants.Popups.DefaultAuthErrorPageDelay)
 
         return ()=>clearTimeout(deleyedRedirect)
     }, [])

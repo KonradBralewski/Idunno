@@ -18,7 +18,7 @@ function App() {
           <Route path="Auth" element={<AuthenticationErrorPage/>}/>
           <Route path="Login" element={<LoginPage/>}/>
           <Route path="/" element={<HBSidebar/>}>
-            <Route path="/Homeboard" element={<Homeboard/>}/>
+            <Route path="/Idunno" element={<Homeboard/>}/>
             <Route path="/Add" element={<AddPage/>}/>
             <Route path="/Posts/:postId" element={<PostPage/>}/>
             <Route path="/Profile" element={<ProfilePage/>}/>
