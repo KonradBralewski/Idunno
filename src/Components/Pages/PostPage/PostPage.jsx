@@ -34,7 +34,7 @@ export default function PostPage(){
                     <PostPageContent post={post}/>
                     <button className="bg-blue-500 rounded-sm px-0.5' border-red-900 border-x-2 border-y-2 
                         text-center text-xs xs:text-sm w-24 xs:w-32 tablet:w-44 self-center">Ask an author</button>
-                </section>
+                </section>  
             )
         }
 
