@@ -11,6 +11,8 @@ export default function ProfilePage(){
     const nav = useNavigate()
 
     React.useEffect(()=>{
+        if(popupsObj.errorMessage === undefined) return
+        
         if(receiveErrorCode(popupsObj.error) == 401){
             nav("/Auth")
         }else {nav("/Idunno")}
