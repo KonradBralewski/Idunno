@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import ExpPostsErrorHandler from "./ExpPostsErrorHandler"
 import { useAxiosRequest } from "Hooks/UseAxiosRequest"
 import { checkIfAnyIsTrue, receiveErrorCode } from "Helpers/JsonHelpers"
+import useShouldReturn from "Hooks/UseShouldReturn"
 
 export default function HBExpPostsList({searchMatch}){
 
@@ -46,11 +47,9 @@ export default function HBExpPostsList({searchMatch}){
         
         return false
     }
-    
-    if(receiveErrorCode(popupsObj.error) == 401){
-        nav("/Auth")
-    }
-    
+
+    useShouldReturn([posts, popupsObj])
+
     return(
         <main className="m-auto flex flex-col">
             <div className="absolute m-auto left-0 right-0 top-36">

@@ -4,27 +4,30 @@ import { useAxiosRequest } from "Hooks/UseAxiosRequest";
 import * as Popups from "Components/Popups/Popups"
 import { receiveErrorCode } from "Helpers/JsonHelpers";
 import { useNavigate } from "react-router-dom";
+import useShouldReturn from "Hooks/UseShouldReturn";
 
 
 export default function MessagesBox(){
 
-    const [messages, popupsObj] = useAxiosRequest("Messages/CurrentUser", "get")
+    const [response, popupsObj] = useAxiosRequest("Messages/CurrentUser", "get")
     const nav = useNavigate()
 
-    React.useEffect(()=>{
-        
-        if(popupsObj.errorMessage === undefined) return
+    useShouldReturn([response, popupsObj])
 
-        if( receiveErrorCode(popupsObj.error) == 401){
-            nav("/Auth")
-        }else {nav("/Idunno")}
-    }, [messages, popupsObj])
+    const mapMessages = () => {
+        if(response === undefined) return
+
+       const mappedMsg = response.map(response => <SingleMessage key={response.message.messageId}
+        messageId = {response.message.messageId} author={response.shipperName} message={response.message.msg}/>)
+
+        return mappedMsg
+    }
 
     return (
         <main className="-mt-32">
             <Popups.Popups popupsObj={popupsObj}/>
             <div>
-                {messages != undefined && messages.map(msg => <SingleMessage key = {msg.messageId} message={msg.msg}/>)}
+                {mapMessages()}
             </div>
         </main>
     )

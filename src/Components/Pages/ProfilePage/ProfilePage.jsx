@@ -4,22 +4,15 @@ import ProfilePageContent from "./ProfilePageContent";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { receiveErrorCode } from "Helpers/JsonHelpers";
+import useShouldReturn from "Hooks/UseShouldReturn";
 
 export default function ProfilePage(){
 
     const [profile, popupsObj] = useAxiosRequest("Users/CurrentUser", "get", undefined, undefined, false)
     const nav = useNavigate()
 
-    React.useEffect(()=>{
-        if(popupsObj.errorMessage === undefined) return
-        
-        if(receiveErrorCode(popupsObj.error) == 401){
-            nav("/Auth")
-        }else {nav("/Idunno")}
-    }, [profile, popupsObj])
+    useShouldReturn([profile, popupsObj])
     
-   
-
     return (
         <main>
             <div className="absolute m-auto left-0 right-0 top-36">
