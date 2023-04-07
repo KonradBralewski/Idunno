@@ -17,14 +17,19 @@ export default function MessagesBox(){
     const mapMessages = () => {
         if(response === undefined) return
 
-       const mappedMsg = response.map(response => <SingleMessage key={response.message.messageId}
-        messageId = {response.message.messageId} author={response.shipperName} message={response.message.msg}/>)
+       const mappedMsg = response.map(response => {
+        const message = response.message
+        if(message.messageId % 2 == 0) return
+        return <SingleMessage key={message.messageId}
+         messageId = {message.messageId} author={response.shipperName}
+         message={message.msg} date ={message.msgDate}/>
+       })
 
         return mappedMsg
     }
 
     return (
-        <main className="-mt-32">
+        <main>
             <Popups.Popups popupsObj={popupsObj}/>
             <div>
                 {mapMessages()}
