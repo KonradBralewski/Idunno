@@ -3,7 +3,6 @@ import * as Popups from "Components/Popups/Popups"
 import ProfilePageContent from "./ProfilePageContent";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { receiveErrorCode } from "Helpers/JsonHelpers";
 import useShouldReturn from "Hooks/UseShouldReturn";
 
 export default function ProfilePage(){
