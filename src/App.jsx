@@ -9,6 +9,7 @@ import HBSidebar from "Components/Pages/HomeboardPage/Sidebar/HBSidebar";
 import ProfilePage from "Components/Pages/ProfilePage/ProfilePage";
 import MessagesPage from "Components/Pages/MessagesPage/MessagesPage"
 import AuthenticationErrorPage from "Components/Pages/AuthenticationErrorPage/AuthenticationErrorPage";
+import ConversationPage from "Components/Pages/ConversationPage/ConversationPage";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/Posts/:postId" element={<PostPage/>}/>
             <Route path="/Profile" element={<ProfilePage/>}/>
             <Route path="/Messages" element={<MessagesPage/>}/>
+            <Route path="/Messages/:messageId" element={<ConversationPage/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

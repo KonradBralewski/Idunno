@@ -2,7 +2,7 @@ import authImg from "Assets/auth.png"
 import * as Popups from "Components/Popups/Popups"
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import cfg from "configuration.json"
+import cfg from "configuration.js"
 import { PopupsContext } from "Context/IdunnoContext";
 
 export default function AuthenticationErrorPage(){

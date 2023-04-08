@@ -1,11 +1,11 @@
 import { PopupsContext } from "Context/IdunnoContext"
 import React from "react"
-import cfg from "../configuration.json"
+import cfg from "../configuration.js"
 import axios from "axios"
 import * as Popups from "Components/Popups/Popups"
 import { useNavigate } from "react-router-dom"
 
-export const useAxiosRequest = (noun, method, statefulRun = null, reqBody = null) => {
+export const useAxiosRequest = (noun, method, statefulRun = null, reqBody = null, autoError = true) => {
 
     const [data, setData] = React.useState(undefined)
     const [popupsObj, setPopupsObj] = React.useContext(PopupsContext)
@@ -39,9 +39,11 @@ export const useAxiosRequest = (noun, method, statefulRun = null, reqBody = null
         }) // setData && "zero" error message.
         .catch(error => {
             Popups.setErrorMessage(setPopupsObj, error)
-            Popups.endWaiting(setPopupsObj)
-            Popups.startError(setPopupsObj)
-            Popups.endError(setPopupsObj, popupsSettings.DefaultErrorVisibilityTime)
+            if(autoError){
+                Popups.endWaiting(setPopupsObj)
+                Popups.startError(setPopupsObj)
+                Popups.endError(setPopupsObj, popupsSettings.DefaultErrorVisibilityTime)
+            }
         })
         .finally(()=>Popups.endWaiting(setPopupsObj))
     }, [noun, method, statefulRun, reqBody])

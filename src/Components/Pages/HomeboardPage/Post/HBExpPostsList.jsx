@@ -5,27 +5,13 @@ import { useNavigate } from "react-router-dom"
 import ExpPostsErrorHandler from "./ExpPostsErrorHandler"
 import { useAxiosRequest } from "Hooks/UseAxiosRequest"
 import { checkIfAnyIsTrue, receiveErrorCode } from "Helpers/JsonHelpers"
+import useShouldReturn from "Hooks/UseShouldReturn"
+import useFilteredRequest from "Hooks/UseFilteredRequest"
 
 export default function HBExpPostsList({searchMatch}){
-
-    
-    const [requestNoun, setRequestNoun] = React.useState(()=>"Posts")
-    const [posts, popupsObj] = useAxiosRequest(requestNoun, "get")
-    
     const nav = useNavigate()
 
-    React.useEffect(()=>{
-        if(searchMatch.length == 0) {
-            setRequestNoun("Posts")
-            return
-    }
-
-        const adjustRequestNounTimeout = setTimeout(()=>{
-            setRequestNoun(`Posts/ByMatch?match=${searchMatch}`)
-        }, 500)
-
-        return () => clearTimeout(adjustRequestNounTimeout)
-    }, [searchMatch])
+    const [posts, popupsObj] = useFilteredRequest("Posts", "Posts/ByMatch?match", "get", searchMatch)
 
     function mapPosts(){
         if(popupsObj.errorMessage != undefined) return
@@ -46,11 +32,9 @@ export default function HBExpPostsList({searchMatch}){
         
         return false
     }
-    
-    if(receiveErrorCode(popupsObj.error) == 401){
-        nav("/Auth")
-    }
-    
+
+    useShouldReturn([posts, popupsObj])
+
     return(
         <main className="m-auto flex flex-col">
             <div className="absolute m-auto left-0 right-0 top-36">

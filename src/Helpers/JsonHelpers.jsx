@@ -27,3 +27,18 @@ export function receiveErrorCode(error){
 
     return 500 // INTERNAL SERVER ERROR
 }
+
+export function hasSameProps( firstObject, secondObject ) {
+    if(firstObject === undefined || secondObject === undefined) return false
+    
+    var firstProperties = Object.keys( firstObject )
+    var secondProperties = Object.keys( secondObject )
+
+    if ( firstProperties.length == secondProperties.length ) {
+        return firstProperties.every( function( prop ) {
+          return secondProperties.indexOf( prop ) >= 0
+        });
+    }
+
+    return false;
+}
