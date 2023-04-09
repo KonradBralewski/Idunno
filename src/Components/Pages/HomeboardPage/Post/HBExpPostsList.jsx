@@ -23,9 +23,8 @@ export default function HBExpPostsList({searchMatch}){
             imagePath={post.imagePath}
             handleClick={()=>{nav(`/Posts/${post.postId}`)}}/>)
     }
-
+    
     function shouldUseHandler(){
-        
         if(popupsObj.wasErrorShowed && popupsObj.error != undefined && !checkIfAnyIsTrue(popupsObj.visiblePopus)){
             return true
         }

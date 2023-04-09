@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useAxiosRequest } from "Hooks/UseAxiosRequest";
 
 
-export default function ProfilePageContent({profile}){
+export default function ProfilePageContent({profile, userPosts}){
 
     const windowSize = useWindowSize()
     const couldBeMobile = windowSize.width < 1024
@@ -22,11 +22,11 @@ export default function ProfilePageContent({profile}){
                     <p className="text-xxs tablet:text-xs text-center text-blue-600">{profile.role}</p>
                     <img src={profilePic} alt="Your profile" className="object-cover my-2 m-auto h-36 tablet:h-60 laptop:h-72"/>
                 </div>
-                {!couldBeMobile && <UserPostsShortcut posts={profile.userPosts}/>}
+                {!couldBeMobile && <UserPostsShortcut posts={userPosts}/>}
             </section>
             <section className="flex flex-col justify-center items-center gap-2">
                 <ChangePasswordForm/>
-                {couldBeMobile && <UserPostsShortcut posts={profile.userPosts}/>}
+                {couldBeMobile && <UserPostsShortcut posts={userPosts}/>}
             </section>
         </main>
     )

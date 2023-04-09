@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function SingleMessage({author, date, message, messageId}){
+export default function SingleMessage({author, date, message, messageId, opacity}){
 
     const nav = useNavigate()
     const navToConversationPage = () => {
@@ -10,9 +10,11 @@ export default function SingleMessage({author, date, message, messageId}){
         }
     }
 
+    const style = opacity == 1.0 ? {} : {opacity : opacity}
+    
     return(
         <div className="flex flex-row w-40 tablet:w-72 laptop:w-96 max-h-fit
-         bg-orange-700 border border-black" onClick={navToConversationPage}>   
+         bg-orange-700 border border-black" onClick={navToConversationPage} style={style}>   
             <div className="flex flex-col border-black m-1.5 px-1 mix-blend-difference
              bg-pink-600 hover:mix-blend-hard-light">
                 <p className="text-center text-xxs tablet:text-xs font-bold">{date}</p>

@@ -26,6 +26,7 @@ export const useAxiosRequest = (noun, method, statefulRun = null, reqBody = null
 
         if(noun === null || noun === undefined) return
 
+        Popups.setErrorWasShowed(setPopupsObj, false)
         Popups.startWaiting(setPopupsObj)
         axios(serverSettings.API_SERVER + noun, {
             method: method, 

@@ -5,9 +5,10 @@ import * as Popups from "Components/Popups/Popups"
 import noMessagesImg from "Assets/noMessages.png"
 import { useNavigate } from "react-router-dom";
 import useShouldReturn from "Hooks/UseShouldReturn";
+import { checkIfAnyIsTrue } from "Helpers/JsonHelpers";
 
 
-export default function MessagesBox({messagesCount, setMessagesCount}){
+export default function MessagesBox({setMessagesCount}){
 
     const [response, popupsObj] = useAxiosRequest("Messages/CurrentUser", "get")
     const nav = useNavigate()
@@ -32,7 +33,8 @@ export default function MessagesBox({messagesCount, setMessagesCount}){
 
         return <SingleMessage key={message.messageId}
          messageId = {message.messageId} author={response.shipperName}
-         message={message.msg} date ={message.msgDate}/>
+         message={message.msg} date ={message.msgDate}
+         opacity={checkIfAnyIsTrue(popupsObj.visiblePopups) ? 0.3 : 1}/>
        })
 
         return mappedMsg
@@ -44,8 +46,10 @@ export default function MessagesBox({messagesCount, setMessagesCount}){
     },[response, popupsObj])
 
     return (
-        <main>
-            <Popups.Popups popupsObj={popupsObj}/>
+        <main className="px-1">
+                <div className="absolute m-auto left-0 right-0 top-36">
+                    <Popups.Popups popupsObj={popupsObj}/>
+                </div>
                 {mapMessages()}
         </main>
     )

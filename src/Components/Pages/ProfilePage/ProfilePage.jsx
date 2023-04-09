@@ -7,17 +7,17 @@ import useShouldReturn from "Hooks/UseShouldReturn";
 
 export default function ProfilePage(){
 
-    const [profile, popupsObj] = useAxiosRequest("Users/CurrentUser", "get", undefined, undefined, false)
+    const [response, popupsObj] = useAxiosRequest("Users/CurrentUser/Profile", "get", undefined, undefined, false)
     const nav = useNavigate()
 
-    useShouldReturn([profile, popupsObj])
+    useShouldReturn([response, popupsObj])
     
     return (
         <main>
             <div className="absolute m-auto left-0 right-0 top-36">
                 <Popups.Popups popupsObj={popupsObj}/>
             </div>
-           {profile != undefined && <ProfilePageContent profile={profile}/>}
+           {response != undefined && <ProfilePageContent profile={response.key} userPosts = {response.value}/>}
         </main>
     )
 }

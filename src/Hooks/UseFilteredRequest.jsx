@@ -4,8 +4,9 @@ import cfg from "configuration.js"
 
 export default function useFilteredRequest(defaultEndpoint, filteredEndpoint, method, searchMatch, shouldSendInstantly, delay){
 
-    const [endpoint, setEndpoint] = React.useState(defaultEndpoint)
     const apiSettings = cfg.Constants.API
+    
+    const [endpoint, setEndpoint] = React.useState(defaultEndpoint)
 
     const [canSend, setCanSend] = React.useState(shouldSendInstantly)
 
@@ -17,6 +18,7 @@ export default function useFilteredRequest(defaultEndpoint, filteredEndpoint, me
     const [response, popupsObj] = useAxiosRequest(endpoint, method, shouldSendInstantly === false ? statefulRun : null)
 
     React.useEffect(()=>{
+        
         if(searchMatch === undefined) return
         if(searchMatch.length == 0) {
             setEndpoint(defaultEndpoint)
