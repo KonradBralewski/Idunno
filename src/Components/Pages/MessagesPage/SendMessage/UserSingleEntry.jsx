@@ -22,7 +22,7 @@ export default function UserSingleEntry({user}){
     }
 
     return (
-        <div className="flex flex-row hover:font-bold" onClick={()=>{nav(`/Messages/${user.userId}`)}}>
+        <div className="flex flex-row hover:font-bold border border-black p-1 bg-gradient-to-br from-green-300 to-green-900" onClick={()=>{nav(`/Messages/${user.userId}`)}}>
             <p style={returnStyledRole()} className="text-xxs tablet:text-xs">{user.role}</p>
             <p className="m-auto text-xxs tablet:text-xs">{user.username}</p>
         </div>
