@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAxiosRequest } from "Hooks/UseAxiosRequest";
 import PostPageContent from "./PostPageContent/PostPageContent";
 import * as Popups from "Components/Popups/Popups"
@@ -7,8 +7,9 @@ import { receiveErrorMessage } from "Helpers/JsonHelpers";
 
 export default function PostPage(){
     
+    const nav = useNavigate()
     const {postId} = useParams()
-
+    
     const [wasRun, setWasRun] = React.useState(true)
 
     const statefulRun = {
@@ -33,7 +34,8 @@ export default function PostPage(){
                 <section className="flex flex-col">
                     <PostPageContent post={post}/>
                     <button className="bg-blue-500 rounded-sm px-0.5' border-red-900 border-x-2 border-y-2 
-                        text-center text-xs xs:text-sm w-24 xs:w-32 tablet:w-44 self-center">Ask an author</button>
+                        text-center text-xs xs:text-sm w-24 xs:w-32 tablet:w-44 self-center"
+                        onClick={()=>{nav(`/Messages/${post.userId}`)}}>Ask an author</button>
                 </section>  
             )
         }

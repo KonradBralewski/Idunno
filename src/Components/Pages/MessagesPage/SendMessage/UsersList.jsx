@@ -12,7 +12,7 @@ export default function UsersList({users}){
 
         return mappedUsers
     }
-    console.log(users)
+    
     return (
         <div>
             {mapUsers()}
