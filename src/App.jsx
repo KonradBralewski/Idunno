@@ -24,7 +24,7 @@ function App() {
             <Route path="/Posts/:postId" element={<PostPage/>}/>
             <Route path="/Profile" element={<ProfilePage/>}/>
             <Route path="/Messages" element={<MessagesPage/>}/>
-            <Route path="/Messages/:userId" element={<ConversationPage/>}/>
+            <Route path="/Conversation/:userId" element={<ConversationPage/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

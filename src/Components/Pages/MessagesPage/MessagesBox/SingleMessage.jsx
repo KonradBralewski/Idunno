@@ -1,12 +1,13 @@
+import { rawHtmlToJSXWithClass } from "Helpers/EditorHelpers";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function SingleMessage({author, date, message, messageId, opacity}){
+export default function SingleMessage({author, authorId, date, message, messageId, opacity}){
 
     const nav = useNavigate()
     const navToConversationPage = () => {
-        if(messageId != undefined){
-            nav(`/Messages/${messageId}`)
+        if(authorId != undefined){
+            nav(`/Conversation/${authorId}`)
         }
     }
 
@@ -20,8 +21,7 @@ export default function SingleMessage({author, date, message, messageId, opacity
                 <p className="text-center text-xxs tablet:text-xs m-auto font-bold">{author}</p>
             </div>
             <div className="m-auto flex-1 mr-1 2 bg-white rounded-2xl hover:shadow-md hover:shadow-black">
-                <p className="text-xxs tablet:text-xs line-clamp-1 font-bold
-                 text-center px-2">{message}</p>
+                {rawHtmlToJSXWithClass(message, "p", "text-xxs tablet:text-xs line-clamp-1 font-bold text-center px-2")}    
             </div>
             
         </div>

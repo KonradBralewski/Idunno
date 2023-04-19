@@ -6,5 +6,6 @@
 
 + ReactJS
     - React Router
+    - Draft.js
 + Tailwind CSS
-+ .NET Core Web API
++ Data provided by ASP.NET Core Web API (<a href="https://github.com/KonradBralewski/IdunnoAPI">IdunnoAPI<a/>)
