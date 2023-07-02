@@ -68,14 +68,15 @@ export function endError(modifierFunc, ms){
     setTimeout(()=>{setErrorWasShowed(modifierFunc, true)}, ms)
 }
 
-export function setErrorMessage(modifierFunc, error){
-    modifierFunc(prevPopups => {
-        return {...prevPopups, error : error}
-    })
-}
 
 export function setErrorWasShowed(modifierFunc, boolean){
     modifierFunc(prevPopups => {
         return {...prevPopups, wasErrorShowed : boolean}
+    })
+}
+
+export function setErrorMessage(modifierFunc, error){
+    modifierFunc(prevPopups => {
+        return {...prevPopups, error : error}
     })
 }

@@ -8,7 +8,7 @@ export default function useShouldReturn(arrayToListen){
     
     const nav = useNavigate()
     React.useEffect(()=>{
-        
+
         for(let item of arrayToListen){
             if(hasSameProps(item, popupsObject)){
                 if(item.error === undefined) return

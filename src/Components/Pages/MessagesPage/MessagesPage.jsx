@@ -8,9 +8,9 @@ export default function MessagesPage(){
 
     return (
         <div className="h-screen w-screen flex flex-col items-center">
-            {messagesCount > 0 && <p className="text-sm tablet:text-lg">Your Messages</p>}
-            <MessagesBox messagesCount={messagesCount} setMessagesCount={setMessagesCount}/>
-            <SendMessage/>
+            {messagesCount > 0 && <p className="text-sm tablet:text-lg overflow-hidden p-1">Your Messages</p>}
+            <MessagesBox setMessagesCount={setMessagesCount}/>
+            {messagesCount > 0 && <SendMessage/>}
         </div>
     )
 }

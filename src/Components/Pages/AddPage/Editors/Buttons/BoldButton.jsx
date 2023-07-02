@@ -8,7 +8,7 @@ export default function BoldButton({editorState, setEditorState}){
     }
     return (
         <div className="my-1 bg-gray-800 text-red-400 text-center rounded font-bold px-1 ml-1 text-xxs flex">
-            <button className="" type="button" onMouseDown={boldText}>Bold</button>
+            <button type="button" onMouseDown={boldText}>Bold</button>
         </div>
     )
 }

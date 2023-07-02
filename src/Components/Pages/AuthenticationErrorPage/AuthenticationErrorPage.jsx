@@ -13,11 +13,11 @@ export default function AuthenticationErrorPage(){
         Popups.endError(setPopupsObj)
 
         Popups.startWaiting(setPopupsObj)
-        Popups.endWaiting(setPopupsObj, cfg.Constants.Popups.DefaultAuthErrorPageDelay)
+        Popups.endWaiting(setPopupsObj, cfg.Constants.Authentication.DefaultAuthErrorPageDelay)
 
         const deleyedRedirect = setTimeout(()=>{
             nav("/Login")
-        }, cfg.Constants.Popups.DefaultAuthErrorPageDelay)
+        }, cfg.Constants.Authentication.DefaultAuthErrorPageDelay)
 
         return ()=>clearTimeout(deleyedRedirect)
     }, [])

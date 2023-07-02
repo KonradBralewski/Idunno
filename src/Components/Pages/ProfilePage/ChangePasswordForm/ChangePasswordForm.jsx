@@ -124,7 +124,7 @@ export default function ChangePasswordForm(){
         <div>
             <button className="my-1 px-1.5 bg-red-600 hover:bg-gray-500 text-xs tablet:text-sm
              text-center w-32 tablet:w-36 laptop:w-44" onClick={()=>changeButtonState(true)}>Change password</button>
-            <div className="flex flex-col w-54 border-2 border-black">
+            <form className={`flex flex-col w-54 border-${isAnythingVisible() ? 0 : 2} border-black justify-center items-center`}>
                 <Warning visible={warnings.currentPassword.visible} message={warnings.currentPassword.message}/>
                 <input type="password" placeholder="Current Password" onChange={handleChange}
                         value={passwordChangeData.data.currentPassword} name="currentPassword" 
@@ -137,7 +137,7 @@ export default function ChangePasswordForm(){
                 <input type="password" placeholder="Confirm Password" onChange={handleChange}
                         value={passwordChangeData.data.confirmNewPassword} name="confirmNewPassword" 
                         className="text-xs tablet:text-sm text-center w-32 tablet:w-36 laptop:w-44"></input>
-            </div>
+            </form>
         </div>
     )
 }
