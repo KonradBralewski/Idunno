@@ -2,13 +2,11 @@ import React from "react";
 import { Editor, EditorState, RichUtils} from "draft-js";
 import cfg from "configuration";
 import { getEditorTextLength } from "Helpers/EditorHelpers";
-import draftStyles from "draftStyles"
 import { useParams } from "react-router-dom";
 import { useAxiosRequest } from "Hooks/UseAxiosRequest";
 import { getEditorText } from "Helpers/EditorHelpers";
 
 export default function SendNewMessage(){
-
     const [editorState, setEditorState] = React.useState(() => EditorState.createEmpty())
 
     const handleMaxLenght = () => {
@@ -46,7 +44,6 @@ export default function SendNewMessage(){
             <div className="bg-white m-0.5 w-4/5">
                 <Editor editorState={editorState} onChange={setEditorState} 
                 handleBeforeInput={handleMaxLenght} handlePastedText={handleMaxLenght}
-                customStyleMap={draftStyles}
                 />
             </div>
             <button className="bg-black text-white rounded-md text-xs

@@ -1,3 +1,4 @@
 {
-    "workbench.colorTheme": "React Theme"
+    "workbench.colorTheme": "React Theme",
+    "typescript.tsdk": "node_modules\\typescript\\lib"
 }

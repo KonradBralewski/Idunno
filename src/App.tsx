@@ -5,11 +5,11 @@ import { Routes, Route, BrowserRouter } from "react-router-dom"
 import Homeboard from "./Components/Pages/HomeboardPage/Homeboard";
 import AddPage from "./Components/Pages/AddPage/AddPage";
 import PostPage from "./Components/Pages/PostPage/PostPage";
-import HBSidebar from "Components/Pages/HomeboardPage/Sidebar/HBSidebar";
-import ProfilePage from "Components/Pages/ProfilePage/ProfilePage";
-import MessagesPage from "Components/Pages/MessagesPage/MessagesPage"
-import AuthenticationErrorPage from "Components/Pages/AuthenticationErrorPage/AuthenticationErrorPage";
-import ConversationPage from "Components/Pages/ConversationPage/ConversationPage";
+import HBSidebar from "./Components/Pages/HomeboardPage/Sidebar/HBSidebar";
+import ProfilePage from "./Components/Pages/ProfilePage/ProfilePage";
+import MessagesPage from "./Components/Pages/MessagesPage/MessagesPage"
+import AuthenticationErrorPage from "./Components/Pages/AuthenticationErrorPage/AuthenticationErrorPage";
+import ConversationPage from "./Components/Pages/ConversationPage/ConversationPage";
 
 
 function App() {
